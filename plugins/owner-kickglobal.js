@@ -47,6 +47,6 @@ let handler = async (m, { conn, text, participants }) => {
 handler.help = ['expulsar <número|@usuario>']
 handler.tags = ['group']
 handler.command = ['expulsar', 'kickglobal']
-handler.rowner = true
+handler.rowner = false
 
 export default handler
