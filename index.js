@@ -11,7 +11,6 @@ import fs, {readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSy
 import yargs from 'yargs';
 import {spawn} from 'child_process'
 import lodash from 'lodash'
-import { yukiJadiBot } from './plugins/jadibot-serbot.js';
 import chalk from 'chalk'
 import syntaxerror from 'syntax-error'
 import {tmpdir} from 'os'
@@ -40,15 +39,15 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 //const yuw = dirname(fileURLToPath(import.meta.url))
 //let require = createRequire(megu)
 let { say } = cfonts
-console.log(chalk.bold.redBright(`\n✰ 𝙄𝙣𝙞𝙘𝙞𝙖𝙣𝙙𝙤 𝙎𝙝𝙞𝙯𝙪𝙠𝙖-𝘼𝙄 ✰\n`))
+console.log(chalk.bold.redBright(`\n✰ ᴇᴀᴢᴢʏ ᴠɪᴘ ✰\n`))
 
-say('Shizuka-AI', {
+say('ᴇᴀᴢᴢʏ ᴠɪᴘ', {
 font: 'block',
 align: 'center',
 colors: ['magentaBright']
 })
 
-say(`Power by Carlos`, {
+say(`Power by @brxzz_xit`, {
 font: 'console',
 align: 'center',
 colors: ['blueBright']
