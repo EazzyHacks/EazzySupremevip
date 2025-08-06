@@ -76,18 +76,18 @@ global.welcom2 = `
 *☠️ Advertencia para los sobrevivientes:* 
 > *"No preguntéis por ello... o seréis el próximo."*`
 
-global.banner = 'https://raw.githubusercontent.com/EazzyHacks/eazzy/refs/heads/main/Shizuka.jpg'
+global.banner = 'https://raw.githubusercontent.com/EazzyHacks/eazzy/refs/heads/main/eazzy.jpg'
 global.avatar = 'https://raw.githubusercontent.com/EazzyHacks/eazzy/refs/heads/main/v2.jpg'
 
 //-----------------------------
 
-global.gp1 = 'https://chat.whatsapp.com/FULTpMKUnwcI6zR7LT3qsW'
-global.comunidad1 = 'https://chat.whatsapp.com/KUQIRhtLBir2FhiiFuqbGO'
-global.channel = 'https://whatsapp.com/channel/0029VbAVMtj2f3EFmXmrzt0v'
-global.channel2 = 'https://whatsapp.com/channel/0029VbAVMtj2f3EFmXmrzt0v'
+global.gp1 = 'https://chat.whatsapp.com/'
+global.comunidad1 = 'https://chat.whatsapp.com/'
+global.channel = 'https://whatsapp.com/channel/'
+global.channel2 = 'https://whatsapp.com/channel/'
 global.md = 'https://github.com/'
 global.correo = 'yallico2024@gmail.com'
-global.cn ='https://whatsapp.com/channel/0029VbAVMtj2f3EFmXmrzt0v';
+global.cn ='https://whatsapp.com/channel/';
 
 //-----------------------------
 
