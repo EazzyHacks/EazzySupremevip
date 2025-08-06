@@ -12,7 +12,7 @@ const handler = async (m, { conn }) => {
     await conn.sendMessage(m.chat, {
       image: { url: imageUrl },
       caption: '🌿 *Naturaleza Random*\n\nUna dosis de ternura para alegrar tu día 🐾\n\n.',
-      footer: 'Plugin creado por Carlos • github.com/Kone457',
+      footer: 'Plugin creado por eazzy • @brxzz_xit',
       templateButtons: [
         {
           index: 1,
