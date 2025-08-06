@@ -9,7 +9,7 @@ import path from 'path'
 
 let handler = async (m, { conn, usedPrefix }) => {
     if (global.conn.user.jid !== conn.user.jid) {
-        return conn.reply(m.chat, `🚫 *Este comando solo puede usarse desde el número principal de Shizuka.*`, m)
+        return conn.reply(m.chat, `🚫 *Este comando solo puede usarse desde el número principal de eazzy.*`, m)
     }
 
     let chatId = m.isGroup ? [m.chat, m.sender] : [m.sender]
@@ -45,6 +45,6 @@ let handler = async (m, { conn, usedPrefix }) => {
 handler.help = ['ds', 'fixmsgespera']
 handler.tags = ['info']
 handler.command = ['fixmsgespera', 'ds']
-handler.register = true
+handler.register = false
 
 export default handler
