@@ -1,7 +1,7 @@
 let handler = async (m, { conn, command, usedPrefix }) => {
 let img = './src/catalogo.jpg'
 let staff = `
-✰ *Dueño* https://Wa.me/5355699866
+✰ *Dueño* https://Wa.me/51936994155
 ✦ *Bot:* ${botname}
 ⚘ *Versión:* ${vs}
 ❖ *Libreria:* ${libreria} ${baileys}
@@ -10,8 +10,6 @@ let staff = `
 
  ☬ 𝘾𝙖𝙧𝙡𝙤𝙨 ☬
 > 🜸 Rol » *Creador*
-> ✧ GitHub » https://github.com/Kone457
-
 `
 await conn.sendFile(m.chat, img, '', staff.trim(), fkontak)
 }
