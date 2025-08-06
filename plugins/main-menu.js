@@ -7,7 +7,7 @@ const handler = async (m, { conn, usedPrefix }) => {
   // --- Variables para la apariencia de canal (puedes personalizarlas) ---
   const botname = 'Eazzy X';
   const textbot = 'Asistente virtual de WhatsApp';
-  const banner = 'https://files.catbox.moe/uws6ec.jpg';
+  const banner = 'https://qu.ax/DdvPe.jpg';
   const redes = 'https://chat.whatsapp.com/';
 
   // --- Mapeo de categorías con decoraciones mejoradas ---
@@ -41,7 +41,7 @@ const handler = async (m, { conn, usedPrefix }) => {
     timeZone: 'America/Peru_City',
   };
   const fecha = date.toLocaleDateString('es-ES', options);
-  const hora = date.toLocaleTimeString('es-ES', { timeZone: 'America/Mexico_City' });
+  const hora = date.toLocaleTimeString('es-ES', { timeZone: 'America/Peru_City' });
   
   const hour = date.getHours();
   let saludo;
