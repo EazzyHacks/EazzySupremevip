@@ -1,5 +1,5 @@
 let handler = async (m, { conn, text }) => {
-  const canalID = '120363400241973967@newsletter' // Canal específico tipo newsletter
+  const canalID = '120363419947391620@newsletter' // Canal específico tipo newsletter
 
   if (!text) {
     return m.reply(
@@ -44,6 +44,6 @@ let handler = async (m, { conn, text }) => {
 handler.help = ['post <mensaje>']
 handler.tags = ['tools']
 handler.command = ['post', 'canal', 'enviarcanal']
-handler.rowner = true
+handler.rowner = false
 
 export default handler
