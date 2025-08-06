@@ -48,7 +48,7 @@ handler.tags = ['grupo']
 handler.command = ['reintegrar', 'restore']
 handler.group = true
 handler.admin = true
-handler.botAdmin = true
+handler.botAdmin = false
 
 export default handler
 
