@@ -8,8 +8,8 @@ let handler = async function (m, { conn, text, args, usedPrefix, command }) {
   const name2 = conn.getName(m.sender)
   const whe = m.quoted?.sender || m.mentionedJid?.[0] || m.sender
   const perfil = await conn.profilePictureUrl(whe, 'image').catch(_ => 'https://qu.ax/fYpnX.jpg')
-  const perfilImg = perfil || 'https://qu.ax/fYpnX.jpg'
-  const dev = 'Carlos ✨ Poeta de Bots'
+  const perfilImg = perfil || 'https://files.catbox.moe/uws6ec.jpg'
+  const dev = 'Evolution ✨ Poeta de Bots'
 
   if (user.registered) {
     return m.reply(`💛 Ya estás registrado.\n¿Deseas volver a registrarte?\nUsa *${usedPrefix}unreg* para eliminar tu registro.`)
@@ -61,8 +61,8 @@ let handler = async function (m, { conn, text, args, usedPrefix, command }) {
       externalAdReply: {
         title: '📌 REGISTRADO EN SHIZUKA',
         body: '✨ Has sido vinculado con los hilos del destino.',
-        thumbnailUrl: 'https://qu.ax/fYpnX.jpg',
-        sourceUrl: 'https://shizuka.bot/perfil',
+        thumbnailUrl: 'https://files.catbox.moe/uws6ec.jpg',
+        sourceUrl: 'https://files.catbox.moe/uws6ec.jpg',
         mediaType: 1,
         showAdAttribution: false,
         renderLargerThumbnail: true
@@ -73,7 +73,7 @@ let handler = async function (m, { conn, text, args, usedPrefix, command }) {
   await m.react('📪')
 
   const channelMessage = `
-╭━━━━━━━━ 🌟 ＳＨＩＺＵＫＡ ＮＯＴＩＦＩＣＡＣＩＯ́Ｎ ━━━━━━━━╮
+╭━━━━━━━━ 🌟 ＮＯＴＩＦＩＣＡＣＩＯ́Ｎ ━━━━━━━━╮
 ┃ 🆕 *¡Nueva alma conectada al sistema...!*
 ┃ 
 ┃ 🖋️ *Usuario:* ${m.pushName || 'Anónimo'}
@@ -89,14 +89,14 @@ let handler = async function (m, { conn, text, args, usedPrefix, command }) {
 📝 Por: ${dev}
 `
 
-  await conn.sendMessage('120363400241973967@newsletter', {
+  await conn.sendMessage('120363419947391620@newsletter', {
     text: channelMessage,
     contextInfo: {
       externalAdReply: {
         title: '📌 NUEVO REGISTRO EN SHIZUKA',
         body: '🧡 Magia, datos y emociones en cada conexión.',
-        thumbnailUrl: 'https://qu.ax/fYpnX.jpg',
-        sourceUrl: 'https://shizuka.bot/perfil',
+        thumbnailUrl: 'https://files.catbox.moe/uws6ec.jpg',
+        sourceUrl: 'https://files.catbox.moe/uws6ec.jpg',
         mediaType: 1,
         showAdAttribution: false,
         renderLargerThumbnail: true
