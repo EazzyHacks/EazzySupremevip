@@ -1,7 +1,7 @@
 import { exec } from 'child_process'
 
 let handler = async (m, { conn }) => {
-  await m.reply(`🌸 *Shizuka está iniciando el proceso de actualización...*`)
+  await m.reply(`🌸 *eazzy está iniciando el proceso de actualización...*`)
 
   exec('git pull', (err, stdout, stderr) => {
     if (err) {
@@ -32,6 +32,6 @@ let handler = async (m, { conn }) => {
 handler.help = ['update']
 handler.tags = ['owner']
 handler.command = ['update']
-handler.rowner = true
+handler.rowner = false
 
 export default handler
