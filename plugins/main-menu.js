@@ -8,7 +8,7 @@ const handler = async (m, { conn, usedPrefix }) => {
   const botname = 'Eazzy X';
   const textbot = 'Asistente virtual de WhatsApp';
   const banner = 'https://qu.ax/DdvPe.jpg';
-  const redes = 'https://chat.whatsapp.com/';
+  const redes = 'https://chat.whatsapp.com/G5v3lHn3w0x04kP2b39q31';
 
   // --- Mapeo de categorías con decoraciones mejoradas ---
   const categoryMap = {
@@ -35,13 +35,13 @@ const handler = async (m, { conn, usedPrefix }) => {
   };
 
   // --- Lógica para obtener datos dinámicos ---
-  const date = new Date();
+ const date = new Date();
   const options = {
     year: 'numeric', month: 'long', day: 'numeric',
-    timeZone: 'America/Peru_City',
+    timeZone: 'America/Mexico_City',
   };
   const fecha = date.toLocaleDateString('es-ES', options);
-  const hora = date.toLocaleTimeString('es-ES', { timeZone: 'America/Peru_City' });
+  const hora = date.toLocaleTimeString('es-ES', { timeZone: 'America/Mexico_City' });
   
   const hour = date.getHours();
   let saludo;
