@@ -36,15 +36,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   // Mensaje de BIENVENIDA (imagen de perfil o predeterminada)
   if (chat.welcome && m.messageStubType == 27) {
     const mention = m.messageStubParameters[0].split('@')[0]
-    const bienvenida = `
-☠️ *▄︻デ══━💀 @${mention}...*  
-*Tu huella digital ha sido rastreada. Bienvenido a la red oscura.*
-
-${global.welcom1}
-
-✦ Presas en el sistema: ${groupSize}
-*No escaparás...*
-> Tu alma ahora es nuestra 👁️`.trim()
+    const bienvenida = `${global.welcom1}`.trim()
     
     await conn.sendMini(
       m.chat, 
@@ -61,15 +53,7 @@ ${global.welcom1}
   // Mensaje de DESPEDIDA (imagen personalizada)
   if (chat.welcome && (m.messageStubType == 28 || m.messageStubType == 32)) {
     const mention = m.messageStubParameters[0].split('@')[0]
-    const bye = `
-☠️ *▄︻デ══━💀 @${mention}...*  
-*¡Señal perdida! El objetivo ha abandonado la red oscura.*
-
-${global.welcom2}
-
-✦ Sobrevivientes: ${groupSize} 
-*La cacería no termina...*
-> Tu sangre aún nos pertenece 🩸`.trim()
+    const bye = `${global.welcom2}`.trim()
     
     await conn.sendMini(
       m.chat, 
