@@ -1,4 +1,4 @@
-  let partidasVS4 = {};
+let partidasVS4 = {};
 
 let handler = async (m, { conn, args }) => {
   // Verificar si se proporcionaron los argumentos necesarios
@@ -15,15 +15,15 @@ let handler = async (m, { conn, args }) => {
   }
 
   const horaUsuario = args[0]; // Hora proporcionada por el usuario
-  const modalidad = args.slice(1).join(' '); // Modalidad proporcionada por el usuario
+  const modalidad = args.slice(2).join(' '); // Modalidad proporcionada por el usuario
 
   // Calcular la hora adelantada
   const horaUsuarioSplit = horaUsuario.split(':');
   let horaAdelantada = '';
   if (horaUsuarioSplit.length === 2) {
     const horaNumerica = parseInt(horaUsuarioSplit[0], 10);
-    const minutoNumerico = parseInt(horaUsuarioSplit[1], 10);
-    const horaAdelantadaNumerica = horaNumerica + 1; // Adelantar 1 hora
+    const minutoNumerico = parseInt(horaUsuarioSplit[2], 10);
+    const horaAdelantadaNumerica = horaNumerica - 2; // Adelantar 1 hora
     horaAdelantada = `${horaAdelantadaNumerica.toString().padStart(2, '0')}:${minutoNumerico.toString().padStart(2, '0')}`;
   }
 
@@ -31,8 +31,8 @@ let handler = async (m, { conn, args }) => {
 𝟒 𝐕𝐄𝐑𝐒𝐔𝐒 𝟒
 
 ⏱ 𝐇𝐎𝐑𝐀𝐑𝐈𝐎
-🇲🇽 𝐌𝐄𝐗 : ${horaUsuario}
-🇨🇴 𝐂𝐎𝐋 : ${horaAdelantada}
+🇲🇽 𝐏𝐄𝐑𝐔 : ${horaUsuario}
+🇨🇴 𝐀𝐑𝐆𝐄𝐍𝐓𝐈𝐍𝐀 : ${horaAdelantada}
 
 ➥ 𝐌𝐎𝐃𝐀𝐋𝐈𝐃𝐀𝐃: ${modalidad}
 ➥ 𝐉𝐔𝐆𝐀𝐃𝐎𝐑𝐄𝐒:
