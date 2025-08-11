@@ -1,125 +1,142 @@
-import pkg from '@whiskeysockets/baileys';
-const { proto } = pkg;
+  let partidasVS4 = {};
 
-let listasGrupos = new Map();
-let mensajesGrupos = new Map();
-
-const getListasGrupo = (groupId) => {
-  if (!listasGrupos.has(groupId)) {
-    listasGrupos.set(groupId, {
-      squad1: ['➤', '➤', '➤', '➤'],
-      suplente: ['➤', '➤', '➤', '➤']
-    });
-  }
-  return listasGrupos.get(groupId);
-};
-
-const reiniciarListas = (groupId) => {
-  listasGrupos.set(groupId, {
-    squad1: ['➤', '➤', '➤', '➤'],
-    suplente: ['➤', '➤', '➤', '➤']
-  });
-};
-
-let processedMessages = new Set();
-
-const handler = async (m, { conn }) => {
-  const groupId = m.chat;
-
-  if (m.message?.buttonsResponseMessage) {
-    // Procesar respuesta a botón
-    if (processedMessages.has(m.key.id)) return; // evitar duplicados
-    processedMessages.add(m.key.id);
-
-    const id = m.message.buttonsResponseMessage.selectedButtonId;
-    let listas = getListasGrupo(groupId);
-    const numero = m.sender.split('@')[0];
-    const nombreUsuario = m.pushName || numero;
-    const tag = m.sender;
-
-    // Limpiar participaciones anteriores
-    ['squad1', 'suplente'].forEach(key => {
-      const index = listas[key].findIndex(p => p.includes(`@${nombreUsuario}`));
-      if (index !== -1) listas[key][index] = '➤';
-    });
-
-    const squadType = id === 'asistir' ? 'squad1' : 'suplente';
-    const libre = listas[squadType].findIndex(p => p === '➤');
-
-    if (libre !== -1) {
-      listas[squadType][libre] = `@${nombreUsuario}`;
-      await conn.sendMessage(groupId, {
-        text: `✅ @${nombreUsuario} agregado a ${id === 'asistir' ? 'Asistencia' : 'Suplente'}`,
-        mentions: [tag]
-      });
-    } else {
-      await conn.sendMessage(groupId, {
-        text: `⚠️ ${id === 'asistir' ? 'Asistencia' : 'Suplente'} está llena`,
-        mentions: [tag]
-      });
-    }
-
-    const mensajeGuardado = mensajesGrupos.get(groupId) || '';
-    await mostrarLista(conn, groupId, listas, [tag], mensajeGuardado);
+let handler = async (m, { conn, args }) => {
+  // Verificar si se proporcionaron los argumentos necesarios
+  if (args.length < 2) {
+    conn.reply(m.chat, '_Debes proporcionar la hora (HH:MM) y la modalidad._', m);
     return;
   }
 
-  // Procesar comando .4vs4
-  if (!m.text?.toLowerCase().startsWith('.4vs4')) return;
-
-  const mensaje = m.text.substring(6).trim();
-  if (!mensaje) {
-    await conn.sendMessage(groupId, {
-      text: `🕓 𝗜𝗡𝗚𝗥𝗘𝗦𝗔 𝗨𝗡 𝗛𝗢𝗥𝗔𝗥𝗜𝗢.\nEjemplo:\n.4vs4 4pm🇪🇨/3pm🇲🇽`
-    });
+  // Validar el formato de la hora
+  const horaRegex = /^([01]\d|2[0-3]):?([0-5]\d)$/;
+  if (!horaRegex.test(args[0])) {
+    conn.reply(m.chat, '_Formato de hora incorrecto. Debe ser HH:MM en formato de 24 horas._', m);
     return;
   }
 
-  reiniciarListas(groupId);
-  let listas = getListasGrupo(groupId);
-  mensajesGrupos.set(groupId, mensaje);
-  await mostrarLista(conn, groupId, listas, [], mensaje);
-};
+  const horaUsuario = args[0]; // Hora proporcionada por el usuario
+  const modalidad = args.slice(1).join(' '); // Modalidad proporcionada por el usuario
 
-async function mostrarLista(conn, chat, listas, mentions = [], mensajeUsuario = '') {
-  const texto = `🕓 𝗛𝗢𝗥𝗔: ${mensajeUsuario ? mensajeUsuario + '\n' : ''}
-📑 𝗥𝗘𝗚𝗟𝗔𝗦: 𝗖𝗟𝗜𝗖𝗞
+  // Calcular la hora adelantada
+  const horaUsuarioSplit = horaUsuario.split(':');
+  let horaAdelantada = '';
+  if (horaUsuarioSplit.length === 2) {
+    const horaNumerica = parseInt(horaUsuarioSplit[0], 10);
+    const minutoNumerico = parseInt(horaUsuarioSplit[1], 10);
+    const horaAdelantadaNumerica = horaNumerica + 1; // Adelantar 1 hora
+    horaAdelantada = `${horaAdelantadaNumerica.toString().padStart(2, '0')}:${minutoNumerico.toString().padStart(2, '0')}`;
+  }
 
-╭──────⚔──────╮
-4 𝗩𝗘𝗥𝗦𝗨𝗦 4
-╰──────⚔──────╯
-╭─────────────╮
-│ 𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔
-│👑 ${listas.squad1[0]}
-│🥷🏻 ${listas.squad1[1]}
-│🥷🏻 ${listas.squad1[2]}
-│🥷🏻 ${listas.squad1[3]}
-╰─────────────╯
-╭─────────────╮
-│ 𝗦𝗨𝗣𝗟𝗘𝗡𝗧𝗘𝗦
-│🥷🏻 ${listas.suplente[0]}
-│🥷🏻 ${listas.suplente[1]}
-│🥷🏻 ${listas.suplente[2]}
-│🥷🏻 ${listas.suplente[3]}
-╰─────────────╯
-©EliteBotGlobal 2023`;
+  let plantilla = `
+𝟒 𝐕𝐄𝐑𝐒𝐔𝐒 𝟒
 
-  const buttons = [
-    { buttonId: 'asistir', buttonText: { displayText: 'Asistir' }, type: 1 },
-    { buttonId: 'suplente', buttonText: { displayText: 'Suplente' }, type: 1 },
-  ];
+⏱ 𝐇𝐎𝐑𝐀𝐑𝐈𝐎
+🇲🇽 𝐌𝐄𝐗 : ${horaUsuario}
+🇨🇴 𝐂𝐎𝐋 : ${horaAdelantada}
 
-  const buttonMessage = {
-    text: texto,
-    footer: 'Selecciona una opción:',
-    buttons: buttons,
-    headerType: 1
-  };
+➥ 𝐌𝐎𝐃𝐀𝐋𝐈𝐃𝐀𝐃: ${modalidad}
+➥ 𝐉𝐔𝐆𝐀𝐃𝐎𝐑𝐄𝐒:
 
-  await conn.sendMessage(chat, buttonMessage, { mentions });
+      𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 1
+    
+    👑 ┇  
+    🥷🏻 ┇  
+    🥷🏻 ┇ 
+    🥷🏻 ┇  
+    
+    ʚ 𝐒𝐔𝐏𝐋𝐄𝐍𝐓𝐄𝐒:
+    🥷🏻 ┇ 
+    🥷🏻 ┇
+
+(𝚁𝚎𝚊𝚌𝚌𝚒𝚘𝚗𝚊 𝚌𝚘𝚗 ❤️ 𝚙𝚊𝚛𝚊 𝚞𝚗𝚒𝚛𝚝𝚎)
+  `.trim()
+
+  let msg = await conn.sendMessage(m.chat, { text: plantilla }, { quoted: m })
+  partidasVS4[msg.key.id] = {
+    chat: m.chat,
+    jugadores: [],
+    suplentes: [],
+    horaUsuario: horaUsuario,
+    horaAdelantada: horaAdelantada,
+    modalidad: modalidad,
+    originalMsg: msg,
+  }
 }
 
-handler.command = /^4vs4$/i;
-handler.group = true;
+handler.help = ['4vs4']
+handler.tags = ['freefire']
+handler.command = /^(vs4|4vs4|masc4)$/i
+handler.group = true
+handler.admin = true
 
-export default handler;
+// Función para manejar las reacciones
+handler.before = async function (m) {
+  if (!m.message?.reactionMessage) return false
+  
+  let reaction = m.message.reactionMessage
+  let key = reaction.key
+  let emoji = reaction.text
+  let sender = m.key.participant || m.key.remoteJid
+
+  // Solo procesar reacciones de corazón o pulgar arriba
+  if (!['❤️', '👍🏻', '❤', '👍'].includes(emoji)) return false
+  
+  // Verificar si existe la partida
+  if (!partidasVS4[key.id]) return false
+
+  let data = partidasVS4[key.id]
+
+  // Verificar si el usuario ya está en la lista
+  if (data.jugadores.includes(sender) || data.suplentes.includes(sender)) return false
+
+  // Agregar a jugadores principales o suplentes
+  if (data.jugadores.length < 4) {
+    data.jugadores.push(sender)
+  } else if (data.suplentes.length < 2) {
+    data.suplentes.push(sender)
+  } else {
+    return false // Lista llena
+  }
+
+  // Crear las menciones para jugadores y suplentes
+  let jugadores = data.jugadores.map(u => `@${u.split('@')[0]}`)
+  let suplentes = data.suplentes.map(u => `@${u.split('@')[0]}`)
+
+  let plantilla = `
+𝟒 𝐕𝐄𝐑𝐒𝐔𝐒 𝟒
+
+⏱ 𝐇𝐎𝐑𝐀𝐑𝐈𝐎
+🇲🇽 𝐌𝐄𝐗 : ${data.horaUsuario}
+🇨🇴 𝐂𝐎𝐋 : ${data.horaAdelantada}
+
+➥ 𝐌𝐎𝐃𝐀𝐋𝐈𝐃𝐀𝐃: ${data.modalidad}
+➥ 𝐉𝐔𝐆𝐀𝐃𝐎𝐑𝐄𝐒:
+
+      𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 1
+    
+    👑 ┇ ${jugadores[0] || ''}
+    🥷🏻 ┇ ${jugadores[1] || ''}
+    🥷🏻 ┇ ${jugadores[2] || ''}
+    🥷🏻 ┇ ${jugadores[3] || ''}
+    
+    ʚ 𝐒𝐔𝐏𝐋𝐄𝐍𝐓𝐄𝐒:
+    🥷🏻 ┇ ${suplentes[0] || ''}
+    🥷🏻 ┇ ${suplentes[1] || ''}
+
+${data.jugadores.length < 4 || data.suplentes.length < 2 ? '(𝚁𝚎𝚊𝚌𝚌𝚒𝚘𝚗𝚊 𝚌𝚘𝚗 ❤️ 𝚙𝚊𝚛𝚊 𝚞𝚗𝚒𝚛𝚝𝚎)' : '✅ 𝐋𝐈𝐒𝐓𝐀 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐀'}
+  `.trim()
+
+  try {
+    await this.sendMessage(data.chat, {
+      text: plantilla,
+      edit: data.originalMsg.key,
+      mentions: [...data.jugadores, ...data.suplentes]
+    })
+  } catch (error) {
+    console.error('Error al editar mensaje:', error)
+  }
+
+  return false
+}
+
+export default handler
