@@ -29,7 +29,7 @@ let handler = async (m, { conn, args }) => {
 
   let plantilla = `
 ⏰| 𝑯𝒐𝒓𝒂:  ${horaUsuario}🇦🇷  ${horaAdelantada}🇵🇪
-🏯| 𝑴𝒐𝒅𝒐: Apostado Mixto
+🏯| 𝑴𝒐𝒅𝒐: Apostado Mixto 2 - 2
 ⚔️| 𝑹𝒊𝒗𝒂𝒍: ${modalidad}
 
 ╭── ⋆⋅☆⋅⋆ ──┈┈
