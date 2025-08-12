@@ -38,6 +38,7 @@ let handler = async (m, { conn, args }) => {
 │˚.⋆🪐→ 
 │˚.⋆🪐→  
 ╰─── ⋆⋅☆⋅⋆ ────
+     (𝚁𝚎𝚊𝚌𝚌𝚒𝚘𝚗𝚊 𝚌𝚘𝚗 ❤️ 𝚙𝚊𝚛𝚊 𝚞𝚗𝚒𝚛𝚝𝚎)
   `.trim()
 
   let msg = await conn.sendMessage(m.chat, { text: plantilla }, { quoted: m })
@@ -92,9 +93,9 @@ handler.before = async function (m) {
   let suplentes = data.suplentes.map(u => `@${u.split('@')[0]}`)
 
   let plantilla = `
-⏰| 𝑯𝒐𝒓𝒂:  ${horaUsuario}🇦🇷  ${horaAdelantada}🇵🇪
+⏰| 𝑯𝒐𝒓𝒂:  ${data.horaUsuario}🇦🇷  {data.horaAdelantada}🇵🇪
 🏯| 𝑴𝒐𝒅𝒐: Apostado
-⚔️| 𝑹𝒊𝒗𝒂𝒍: ${modalidad}
+⚔️| 𝑹𝒊𝒗𝒂𝒍:  ${data.modalidad}
 
 ╭── ⋆⋅☆⋅⋆ ──┈┈
 │˚.⋆🎀→ ${jugadores[0] || ''}
@@ -105,7 +106,7 @@ handler.before = async function (m) {
 
 ╭── ⋆⋅☆⋅⋆ ──┈┈
 │˚.⋆🎀→ ${jugadores[0] || ''}
-│˚.⋆🪐→  ${jugadores[1] || ''}
+│˚.⋆🪐→  ${jugadores[1+] || ''}
 ╰─── ⋆⋅☆⋅⋆ ────
 
 ${data.jugadores.length < 4 || data.suplentes.length < 2 ? '(𝚁𝚎𝚊𝚌𝚌𝚒𝚘𝚗𝚊 𝚌𝚘𝚗 ❤️ 𝚙𝚊𝚛𝚊 𝚞𝚗𝚒𝚛𝚝𝚎)' : '✅ 𝐋𝐈𝐒𝐓𝐀 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐀'}
@@ -125,4 +126,3 @@ ${data.jugadores.length < 4 || data.suplentes.length < 2 ? '(𝚁𝚎𝚊𝚌�
 }
 
 export default handler
-
