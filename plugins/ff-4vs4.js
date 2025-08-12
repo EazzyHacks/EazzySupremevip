@@ -23,7 +23,7 @@ let handler = async (m, { conn, args }) => {
   if (horaUsuarioSplit.length === 2) {
     const horaNumerica = parseInt(horaUsuarioSplit[0], 10);
     const minutoNumerico = parseInt(horaUsuarioSplit[1], 10);
-    const horaAdelantadaNumerica = horaNumerica + 1; // Adelantar 1 hora
+    const horaAdelantadaNumerica = horaNumerica + 2; // Adelantar 1 hora
     horaAdelantada = `${horaAdelantadaNumerica.toString().padStart(2, '0')}:${minutoNumerico.toString().padStart(2, '0')}`;
   }
 
