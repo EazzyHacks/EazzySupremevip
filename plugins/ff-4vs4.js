@@ -3,7 +3,7 @@ let partidasVS4 = {};
 let handler = async (m, { conn, args }) => {
   // Verificar si se proporcionaron los argumentos necesarios
   if (args.length < 2) {
-    conn.reply(m.chat, '_Debes proporcionar la hora (HH:MM) y el rival._', m);
+    conn.reply(m.chat, '_Debes proporcionar la hora (HH:MM) y el genero._', m);
     return;
   }
 
@@ -29,8 +29,8 @@ let handler = async (m, { conn, args }) => {
 
   let plantilla = `
 ⏰| 𝑯𝒐𝒓𝒂:  ${horaUsuario}🇦🇷  ${horaAdelantada}🇵🇪
-🏯| 𝑴𝒐𝒅𝒐: Apostado Mixto 2 - 2
-⚔️| 𝑹𝒊𝒗𝒂𝒍: ${modalidad}
+🏯| 𝑴𝒐𝒅𝒐: Apostado
+⚔️| 𝙂𝙚𝙣𝙚𝙧𝙤: ${modalidad}
 
 ╭── ⋆⋅☆⋅⋆ ──┈┈
 │˚.⋆🥷🏻 → 
@@ -58,9 +58,9 @@ let handler = async (m, { conn, args }) => {
   }
 }
 
-handler.help = ['Mixto4']
-handler.tags = ['ffsur']
-handler.command = /^(Mixto4)$/i
+handler.help = ['vs4']
+handler.tags = ['ff']
+handler.command = ['vs4', 'vs4']
 handler.group = true
 handler.admin = true
 
@@ -99,8 +99,8 @@ handler.before = async function (m) {
 
   let plantilla = `
 ⏰| 𝑯𝒐𝒓𝒂:  ${data.horaUsuario} 🇦🇷  ${data.horaAdelantada} 🇵🇪
-🏯| 𝑴𝒐𝒅𝒐: Apostado Mixto
-⚔️| 𝑹𝒊𝒗𝒂𝒍:  ${data.modalidad}
+🏯| 𝑴𝒐𝒅𝒐: Apostado
+⚔️| 𝙂𝙚𝙣𝙚𝙧𝙤:  ${data.modalidad}
 
 ╭── ⋆⋅☆⋅⋆ ──┈┈
 │˚.⋆🥷🏻→ ${jugadores[0] || ''}
